@@ -4,7 +4,7 @@ var TodoBox = React.createClass({
       data:
       [
         {title: "pick nose", description: "insert finger into left nostril, then right."},
-        {title: "play vieogames", description: "pick up thenm sticks!"}
+        {title: "play videogames", description: "pick up thenm sticks!"}
       ]};
   },
   addData: function(task) {
@@ -50,9 +50,25 @@ var TodoForm = React.createClass({
 
 var TaskList = React.createClass({
   render: function() {
+    var tasks = this.props.taskData.map(function(task){
+      return(
+        <Task tasktitle={task.title} taskdescription={task.description} />
+      );
+    })
+    return (
+      <div className="taskList">
+        {tasks}
+      </div>
+    );
+  }
+});
+
+var Task = React.createClass({
+  render: function() {
     return(
-      <div>
-        {this.props.taskData}
+      <div className="task">
+        <h3>{this.props.tasktitle}</h3>
+        {this.props.taskdescription}
       </div>
     );
   }
