@@ -13,11 +13,19 @@ var TodoBox = React.createClass({
     task.id = newID;
     tasks.push(task);
     $('.notice').html("")
+    $('.showForm').slideDown();
+    $('.todoForm').slideUp();
     this.setState({data: tasks});
+  },
+  showForm: function(e) {
+    e.preventDefault();
+    $('.showForm').hide();
+    $('.todoForm').fadeIn();
   },
   render: function() {
     return (
       <div className="todoBox">
+      <div className="btn btn-danger showForm" onClick={this.showForm}>Add Task</div>
         <TodoForm addDataz={this.addData} />
         <TaskList taskData={this.state.data} />
       </div>
@@ -42,11 +50,13 @@ var TodoForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="todoForm" onSubmit={this.handleSubmit}>
-        <input type="text" ref="title" placeholder="Enter Task Name" />
-        <input type="text" ref="description" placeholder="Describe Task"/>
-        <input type="submit" value="Add Task" />
-      </form>
+      <div className="formdiv">
+        <form className="todoForm" onSubmit={this.handleSubmit}>
+          <input  className="input" type="text" ref="title" placeholder="Enter Task Name" /><br />
+          <input  className="input" type="text" ref="description" placeholder="Describe Task"/><br />
+          <input className="form-control input" type="submit" value="Add Task" className="btn btn-danger" />
+        </form>
+      </div>
     );
   }
 });
@@ -92,7 +102,7 @@ var Task = React.createClass({
   },
   render: function() {
       return(
-        <div className="task unfinished" id={this.props.id}>
+        <div className="task unfinished well" id={this.props.id}>
           <h3 className="title" onClick={this.complete}> {this.props.tasktitle} </h3>
           {this.props.taskdescription}<br />
         </div>
