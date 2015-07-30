@@ -3,8 +3,8 @@ var TodoBox = React.createClass({
     return {
       data:
       [
-        {title: "pick nose", description: "insert finger into left nostril, then right.", id: 1},
-        {title: "play videogames", description: "pick up thenm sticks!", id: 2}
+        {title: "learn react", description: "its crazy", id: 1},
+        {title: "play videogames", description: "pick up them sticks!", id: 2}
       ]};
   },
   addData: function(task) {
@@ -12,6 +12,7 @@ var TodoBox = React.createClass({
     var newID = tasks.length +1;
     task.id = newID;
     tasks.push(task);
+    $('.notice').html("")
     this.setState({data: tasks});
   },
   render: function() {
@@ -59,6 +60,8 @@ var TaskList = React.createClass({
     });
     return (
       <div className="taskList">
+        <div className="notice">
+        </div>
         {tasks}
       </div>
     );
@@ -74,20 +77,24 @@ var Task = React.createClass({
   complete: function(){
     if(this.state.completed){
       this.setState({completed:false});
+      $('.notice').html("")
       $("#"+this.props.id).removeClass('finished')
+      $("#"+this.props.id).addClass('unfinished')
 
     }else{
       this.setState({completed: true});
       $("#"+this.props.id).addClass('finished')
-
+      $("#"+this.props.id).removeClass('unfinished')
+    }
+    if(!$('.unfinished').length){
+      $('.notice').html("<h4>Great job you completed all of your tasks!</h4>")
     }
   },
   render: function() {
       return(
-        <div className="task" id={this.props.id}>
+        <div className="task unfinished" id={this.props.id}>
           <h3 className="title" onClick={this.complete}> {this.props.tasktitle} </h3>
           {this.props.taskdescription}<br />
-          {this.state.completed.toString()}
         </div>
       );
   }
