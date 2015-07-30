@@ -52,12 +52,10 @@ var TodoForm = React.createClass({
 
 var TaskList = React.createClass({
   render: function() {
-
-    makeAlert = function(){
-      $('.task').addClass('finished')
-    }
-
     var tasks = this.props.taskData.map(function(task){
+      makeAlert = function(){
+        $("#"+task.id).addClass('finished')
+      }
       return(
         <Task tasktitle={task.title} taskdescription={task.description} id={task.id} alertTest={this.makeAlert} />
       );
