@@ -50,9 +50,13 @@ var TodoForm = React.createClass({
 
 var TaskList = React.createClass({
   render: function() {
+    makeAlert = function(){
+      alert("I'm clicked!");
+      e.preventDefault();
+    }
     var tasks = this.props.taskData.map(function(task){
       return(
-        <Task tasktitle={task.title} taskdescription={task.description} />
+        <Task tasktitle={task.title} taskdescription={task.description} alertTest={this.makeAlert} />
       );
     })
     return (
@@ -66,8 +70,8 @@ var TaskList = React.createClass({
 var Task = React.createClass({
   render: function() {
     return(
-      <div className="task">
-        <h3>{this.props.tasktitle}</h3>
+      <div className="task" onClick={this.props.alertTest}>
+        <h3 className="title"> {this.props.tasktitle} </h3>
         {this.props.taskdescription}
       </div>
     );
