@@ -3,12 +3,14 @@ var TodoBox = React.createClass({
     return {
       data:
       [
-        {title: "pick nose", description: "insert finger into left nostril, then right."},
-        {title: "play videogames", description: "pick up thenm sticks!"}
+        {title: "pick nose", description: "insert finger into left nostril, then right.", id: 1},
+        {title: "play videogames", description: "pick up thenm sticks!", id: 2}
       ]};
   },
   addData: function(task) {
     var tasks = this.state.data;
+    var newID = tasks.length +1
+    task.id = newID
     tasks.push(task);
     this.setState({data: tasks});
   },
@@ -50,15 +52,17 @@ var TodoForm = React.createClass({
 
 var TaskList = React.createClass({
   render: function() {
+
     makeAlert = function(){
-      alert("I'm clicked!");
-      e.preventDefault();
+      $('.task').addClass('finished')
     }
+
     var tasks = this.props.taskData.map(function(task){
       return(
-        <Task tasktitle={task.title} taskdescription={task.description} alertTest={this.makeAlert} />
+        <Task tasktitle={task.title} taskdescription={task.description} id={task.id} alertTest={this.makeAlert} />
       );
     })
+
     return (
       <div className="taskList">
         {tasks}
@@ -70,7 +74,7 @@ var TaskList = React.createClass({
 var Task = React.createClass({
   render: function() {
     return(
-      <div className="task" onClick={this.props.alertTest}>
+      <div className="task" id={this.props.id} onClick={this.props.alertTest}>
         <h3 className="title"> {this.props.tasktitle} </h3>
         {this.props.taskdescription}
       </div>
