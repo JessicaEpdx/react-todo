@@ -3,15 +3,14 @@ var TodoBox = React.createClass({
     return {
       data:
       [
-        {title: "pick nose", description: "insert finger into left nostril, then right.", id: 1, completed: false},
-        {title: "play videogames", description: "pick up thenm sticks!", id: 2, completed: false}
+        {title: "pick nose", description: "insert finger into left nostril, then right.", id: 1},
+        {title: "play videogames", description: "pick up thenm sticks!", id: 2}
       ]};
   },
   addData: function(task) {
     var tasks = this.state.data;
     var newID = tasks.length +1;
     task.id = newID;
-    task.completed = false;
     tasks.push(task);
     this.setState({data: tasks});
   },
@@ -54,16 +53,13 @@ var TodoForm = React.createClass({
 var TaskList = React.createClass({
   render: function() {
     var tasks = this.props.taskData.map(function(task){
-      makeAlert = function(){
-        $("#"+task.id).addClass('finished')
-      }
       return(
-        <Task tasktitle={task.title} taskdescription={task.description} id={task.id} alertTest={this.makeAlert} taskcompleted={task.completed} />
+        <Task tasktitle={task.title} taskdescription={task.description} id={task.id} />
       );
-    })
-
+    });
     return (
       <div className="taskList">
+
         {tasks}
       </div>
     );
@@ -79,21 +75,32 @@ var Task = React.createClass({
   complete: function(){
     if(this.state.completed){
       this.setState({completed:false});
-      $("#"+this.props.id).removeClass('finished')
+      // $("#"+this.props.id).removeClass('finished')
 
     }else{
       this.setState({completed: true});
-      $("#"+this.props.id).addClass('finished')
+      // $("#"+this.props.id).addClass('finished')
+
     }
   },
   render: function() {
-    return(
-      <div className="task" id={this.props.id} onClick={this.complete}>
-        <h3 className="title"> {this.props.tasktitle} </h3>
-        {this.props.taskdescription}<br />
-        {this.state.completed.toString()}
-      </div>
-    );
+    if (this.state.completed) {
+      return(
+        <div className="completed finished" id={this.props.id} onClick={this.complete}>
+          <h3 className="title"> {this.props.tasktitle} </h3>
+          {this.props.taskdescription}<br />
+          {this.state.completed.toString()}
+        </div>
+      );
+    }else{
+      return(
+        <div className="incomplete" id={this.props.id.toString()} onClick={this.complete}>
+          <h3 className="title"> {this.props.tasktitle} </h3>
+          {this.props.taskdescription}<br />
+          {this.state.completed.toString()}
+        </div>
+      );
+    }
   }
 });
 
