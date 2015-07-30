@@ -59,7 +59,6 @@ var TaskList = React.createClass({
     });
     return (
       <div className="taskList">
-
         {tasks}
       </div>
     );
@@ -69,38 +68,28 @@ var TaskList = React.createClass({
 var Task = React.createClass({
   getInitialState: function() {
     return{
-      completed: false,
+      completed: false
     }
   },
   complete: function(){
     if(this.state.completed){
       this.setState({completed:false});
-      // $("#"+this.props.id).removeClass('finished')
+      $("#"+this.props.id).removeClass('finished')
 
     }else{
       this.setState({completed: true});
-      // $("#"+this.props.id).addClass('finished')
+      $("#"+this.props.id).addClass('finished')
 
     }
   },
   render: function() {
-    if (this.state.completed) {
       return(
-        <div className="completed finished" id={this.props.id} onClick={this.complete}>
-          <h3 className="title"> {this.props.tasktitle} </h3>
+        <div className="task" id={this.props.id}>
+          <h3 className="title" onClick={this.complete}> {this.props.tasktitle} </h3>
           {this.props.taskdescription}<br />
           {this.state.completed.toString()}
         </div>
       );
-    }else{
-      return(
-        <div className="incomplete" id={this.props.id.toString()} onClick={this.complete}>
-          <h3 className="title"> {this.props.tasktitle} </h3>
-          {this.props.taskdescription}<br />
-          {this.state.completed.toString()}
-        </div>
-      );
-    }
   }
 });
 

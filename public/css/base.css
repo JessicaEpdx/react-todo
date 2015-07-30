@@ -70,15 +70,10 @@ ul {
   text-decoration: line-through;
 }
 
-.completed{
-  width:55%;
-  background-color:red;
-  float:right;
-
+.taskList{
+  text-align:center;
 }
 
-.incomplete{
-  width:45%;
-  background-color:teal;
-  margin:0;
+.task{
+  margin:20px;
 }
