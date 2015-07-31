@@ -12,10 +12,17 @@ var TodoBox = React.createClass({
     var newID = tasks.length +1;
     task.id = newID;
     tasks.push(task);
-    $('.notice').html("")
+    $('.notice').hide()
     $('.showForm').slideDown();
     $('.todoForm').slideUp();
+    $('.newList').hide();
     this.setState({data: tasks});
+  },
+  newList: function(e) {
+    e.preventDefault();
+    this.setState({data: []});
+    $('.notice').hide();
+    $('.newList').slideUp();
   },
   showForm: function(e) {
     e.preventDefault();
@@ -25,7 +32,8 @@ var TodoBox = React.createClass({
   render: function() {
     return (
       <div className="todoBox">
-      <div className="btn btn-danger showForm" onClick={this.showForm}>Add Task</div>
+        <div className="btn btn-default newList" onClick={this.newList}>Start Over</div>
+        <div className="btn btn-default showForm" onClick={this.showForm}>Add Task</div>
         <TodoForm addDataz={this.addData} />
         <TaskList taskData={this.state.data} />
       </div>
@@ -87,9 +95,11 @@ var Task = React.createClass({
   complete: function(){
     if(this.state.completed){
       this.setState({completed:false});
-      $('.notice').html("")
+      $('.notice').hide()
       $("#"+this.props.id).removeClass('finished')
       $("#"+this.props.id).addClass('unfinished')
+      $('.newList').slideUp();
+
 
     }else{
       this.setState({completed: true});
@@ -97,7 +107,9 @@ var Task = React.createClass({
       $("#"+this.props.id).removeClass('unfinished')
     }
     if(!$('.unfinished').length){
-      $('.notice').html("<h4>Great job you completed all of your tasks!</h4>")
+      $('.notice').html("<h3>Great job you completed all of your tasks!</h3>")
+      $('.notice').show()
+      $('.newList').slideDown()
     }
   },
   render: function() {
