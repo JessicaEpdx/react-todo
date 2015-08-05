@@ -108,6 +108,8 @@ var Task = React.createClass({
     }
     if(!$('.unfinished').length){
       $('.notice').html("<h3>Great job you completed all of your tasks!</h3>")
+      $('.todoForm').hide();
+      $('.showForm').show();
       $('.notice').show()
       $('.newList').slideDown()
     }
