@@ -81,7 +81,8 @@ ul {
 }
 
 body{
-  background: url("background.jpg") no-repeat top center fixed;
+  /*background: url("background.jpg") no-repeat top center fixed;*/
+  background-color:gray;
   background-size:70%;
 }
 
@@ -106,37 +107,11 @@ body{
   display:none;
   color:#9a0116;
   background-color:white;
+  padding:7px;
 }
 
 .input{
   margin:5px;
-}
-
-.showForm{
-  background-color:#0e8986;
-  border:2px solid #05a7be;
-  color:white;
-}
-
-.showForm:hover{
-  background-color:#05a7be;
-  border:2px solid #05a7be;
-  color:white;
-
-}
-
-.showForm:active{
-  background-color:#05a7be;
-  border:2px solid #05a7be;
-  color:white;
-
-}
-
-.showForm:focus{
-  background-color:#05a7be;
-  border:2px solid #05a7be;
-  color:white;
-
 }
 
 .todoBox{
@@ -149,14 +124,14 @@ body{
   display:none;
   margin: 0 auto;
   margin-bottom: 10px;
-  background-color:#01879a;
-  border:2px solid #05afc7;
+  background-color:#05afc7;
+  border:1px solid #01879a;
   color:white;
 
 }
 
 .newList:hover{
-  background-color:#05afc7;
-  border:2px solid #05afc7;
+  background-color:#01879a;
+  border:1px solid #01879a;
   color:white;
 }

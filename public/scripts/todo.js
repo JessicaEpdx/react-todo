@@ -33,7 +33,7 @@ var TodoBox = React.createClass({
     return (
       <div className="todoBox">
         <div className="btn btn-default newList" onClick={this.newList}>Start Over</div>
-        <div className="btn btn-default showForm" onClick={this.showForm}>Add Task</div>
+        <div className="btn btn-danger showForm" onClick={this.showForm}>Add Task</div>
         <TodoForm addDataz={this.addData} />
         <TaskList taskData={this.state.data} />
       </div>
